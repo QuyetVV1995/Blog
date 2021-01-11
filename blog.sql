@@ -11,6 +11,13 @@ create table post(
 
 insert into post(title, intro, content, created_at)
 values ("test1","intro", "content1", now());
+insert into post(title, intro, content, created_at)
+values ("test2","intro", "content2", now());
+insert into post(title, intro, content, created_at)
+values ("test3","intro", "content3", now());
+insert into post(title, intro, content, created_at)
+values ("test4","intro", "content4", now());
+
 
 
 
