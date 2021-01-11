@@ -25,6 +25,9 @@ public class Post {
     @Column(name = "title", nullable = false, length = 300)
     private String title;
 
+    @Column(name = "intro", nullable = false, length = 300)
+    private String intro;
+
     @Column(name = "content", columnDefinition = "TEXT")
     private String content;
 
