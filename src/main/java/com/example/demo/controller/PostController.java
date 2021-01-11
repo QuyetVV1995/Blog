@@ -45,4 +45,10 @@ public class PostController {
         mav.addObject("editPost", post);
         return mav;
     }
+
+    @GetMapping("/delete/{id}")
+    public String deleteById(@PathVariable(name = "id") long id){
+        postService.deletePost(id);
+        return "redirect:/home";
+    }
 }
