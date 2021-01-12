@@ -59,4 +59,5 @@ public class PostController {
         mav.addObject("searchByTitle",post);
         return mav;
     }
+
 }

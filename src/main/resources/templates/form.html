@@ -3,15 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add book</title>
+    <title>Add Post</title>
 </head>
 <body>
 <form action="#" th:action="@{save}" th:object="${post}" method="post">
     <table border="0" cellpadding="10">
-<!--        <tr>-->
-<!--            <td>ID:</td>-->
-<!--            <td><input type="number" th:field="*{id}" /></td>-->
-<!--        </tr>-->
         <tr>
             <td>Title:</td>
             <td><input type="text" th:field="*{title}" /></td>

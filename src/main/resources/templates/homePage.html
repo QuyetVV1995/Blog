@@ -40,10 +40,10 @@
 
     <ul>
         <li th:each="postList: ${postList}">
-            <p class="title mb-1">Title: <span th:text="${postList.title}"> </span></p>
-            <p class="intro">Intro: <span th:text="${postList.intro}"> </span></p>
-            <p class="intro">Create at: <span th:text="${postList.created_at}"> </span></p>
-            <a class="more-link" href="blog-post.html">Read more &rarr;</a>
+            <p >Title: <span th:text="${postList.title}"> </span></p>
+            <p >Intro: <span th:text="${postList.intro}"> </span></p>
+            <p >Create at: <span th:text="${postList.created_at}"> </span></p>
+            <a class="more-link" href="#">Read more &rarr;</a>
 
         </li>
     </ul>
