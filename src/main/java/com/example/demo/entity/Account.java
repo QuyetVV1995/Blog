@@ -1,8 +1,8 @@
 package com.example.demo.entity;
 
-import lombok.AllArgsConstructor;
+
 import lombok.Getter;
-import lombok.NoArgsConstructor;
+
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -10,8 +10,6 @@ import java.util.Collection;
 
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
 
 @Entity
 @Table(name = "accounts", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
@@ -41,4 +39,12 @@ public class Account {
 
     private Collection< Role > roles;
 
+    public Account(String firstName, String lastName, String email, String password, Collection < Role > roles) {
+        super();
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.roles = roles;
+    }
 }
