@@ -6,33 +6,39 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.io.Serializable;
+import java.util.Collection;
 
-@Setter
 @Getter
-@NoArgsConstructor
+@Setter
 @AllArgsConstructor
+@NoArgsConstructor
 
 @Entity
-@Table(name = "accounts")
-public class Account implements Serializable {
-    public static final String ROLE_MANAGER = "MANAGER";
-    public static final String ROLE_EMPLOYEE = "EMPLOYEE";
+@Table(name = "accounts", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
+public class Account {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private long id;
+    private Long id;
 
-    @Column(name = "username", length = 255, nullable = false)
-    private String username;
+    @Column(name = "first_name")
+    private String firstName;
 
-    @Column(name = "encryted_password", length = 128, nullable = false)
-    private String encryted_password;
+    @Column(name = "last_name")
+    private String lastName;
 
-    @Column(name = "active", length = 1, nullable = false)
-    private boolean active;
+    private String email;
 
-    @Column(name = "user_role", length = 20, nullable = false)
-    private String user_role;
+    private String password;
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "accounts_roles",
+            joinColumns = @JoinColumn(
+                    name = "account_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(
+                    name = "role_id", referencedColumnName = "id"))
+
+    private Collection< Role > roles;
+
 }

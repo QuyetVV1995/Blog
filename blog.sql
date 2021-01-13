@@ -36,3 +36,24 @@ values ('manager1', 1,
 select * from post where title like '%test%';
 select * from post where title like '%test%'  limit 0,1;
 
+drop table accounts;
+
+create table accounts(
+id bigint not null primary key auto_increment,
+email varchar(255) not null,
+first_name varchar(255),
+last_name varchar(255),
+password varchar(255)
+);
+create table role(
+id bigint not null primary key auto_increment,
+name varchar(255)
+);
+create table accounts_roles(
+id bigint not null primary key auto_increment,
+account_id bigint not null,
+role_id bigint not null
+);
+
+alter table accounts_roles add  foreign key(account_id) references accounts(id);
+alter table accounts_roles add  foreign key(role_id) references role(id);
