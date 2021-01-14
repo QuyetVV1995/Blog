@@ -27,12 +27,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers(
-                "/registration**",
-                "/js/**",
-                "/css/**",
-                "/img/**").permitAll()
-                .anyRequest().authenticated()
+
+        http.csrf().disable();
+
+        // Các trang không yêu cầu login
+        http.authorizeRequests().antMatchers("/", "/login", "registration/**",
+                "homePage","index", "searchByTitle").permitAll();
+
+        // Trang /userInfo yêu cầu phải login với vai trò ROLE_USER hoặc ROLE_ADMIN.
+        // Nếu chưa login, nó sẽ redirect tới trang /login.
+        http.authorizeRequests().antMatchers("/AccountInfo").access("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')");
+
+        // Trang chỉ dành cho ADMIN
+        http.authorizeRequests().antMatchers("/listAccount",
+                "editAccount","formAccount","editPost","formPost","searchByEmail").access("hasRole('ROLE_ADMIN')");
+
+        http.authorizeRequests()
                 .and()
                 .formLogin()
                 .loginPage("/login")
@@ -42,7 +52,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .invalidateHttpSession(true)
                 .clearAuthentication(true)
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .logoutSuccessUrl("/login?logout")
+                    .logoutSuccessUrl("/login?logout")
                 .permitAll();
     }
 

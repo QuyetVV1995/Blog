@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5" lang="en">
 <head>
     <title>My Blog</title>
 
@@ -10,6 +11,12 @@
 <body>
 
 <header>
+    <div class="container">
+        <h1>ROAD TO JAPAN</h1>
+        <div class="form-group" th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">
+            Welcome <span sec:authentication="principal.username">!</span>
+        </div>
+    </div>
     <h1>QuyetVV Blog</a></h1>
 
     <div>Hi, my nam is QuyetVV<br><a href="#">Find out more about me</a></div>
