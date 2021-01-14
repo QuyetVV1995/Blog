@@ -14,9 +14,11 @@ import java.util.List;
 
 @Controller
 //@RequestMapping("/admin/account")
-public class AdminPostController {
+public class HomeController {
     @Autowired
     private AccountService accountService;
+    @Autowired
+    private PostService postService;
 
     @GetMapping("/login")
     public String login() {
@@ -24,7 +26,9 @@ public class AdminPostController {
     }
 
     @GetMapping("/")
-    public String home() {
-        return "index";
+    public String getAllPost(Model model){
+        List<Post> postList = postService.getAllPost();
+        model.addAttribute("postList", postList);
+        return "homePage";
     }
 }

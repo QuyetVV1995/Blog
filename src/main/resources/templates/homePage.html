@@ -13,9 +13,10 @@
 <header>
     <div class="container">
         <h1>ROAD TO JAPAN</h1>
-        <div class="form-group" th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">
+        <div  th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">
             Welcome <span sec:authentication="principal.username">!</span>
         </div>
+
     </div>
     <h1>QuyetVV Blog</a></h1>
 
@@ -40,7 +41,9 @@
         </li>
     </ul>
     </div>
-    </nav>
+    <div  th:unless="${#authorization.expression('hasRole(''ROLE_USER'')')}">
+        <a th:href="@{/login}"> Login </a>
+    </div>
 </header>
 
 <div>

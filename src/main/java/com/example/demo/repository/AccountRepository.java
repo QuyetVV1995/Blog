@@ -11,8 +11,5 @@ import java.util.List;
 @Repository
 public interface AccountRepository extends JpaRepository<Account, Long> {
 
-    @Query(value = "select * from accounts where username like %:username% limit 0,1", nativeQuery = true)
-    public Account  findByUsername(@Param("username") String username);
-
     Account findByEmail(String email);
 }

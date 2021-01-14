@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/registration")
-public class AccountController {
+public class Registration {
     @Autowired
     private AccountService accountService;
 

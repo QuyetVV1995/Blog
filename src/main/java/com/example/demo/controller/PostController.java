@@ -19,13 +19,7 @@ public class PostController {
     @Autowired
     private PostService postService;
 
-    @GetMapping("/home")
-    public String getAllPost(Model model){
-        List<Post> postList = postService.getAllPost();
-        model.addAttribute("postList", postList);
-        return "homePage";
-    }
-
+    
     @GetMapping("/add")
     public String createPost(Model model) {
         model.addAttribute("post", new Post());
