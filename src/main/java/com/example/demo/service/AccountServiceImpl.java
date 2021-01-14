@@ -30,7 +30,7 @@ public class AccountServiceImpl implements AccountService {
     public Account save(AccountRegistrationDto accountRegistrationDto) {
         Account account = new Account(accountRegistrationDto.getFirstName(),
                 accountRegistrationDto.getLastName(), accountRegistrationDto.getEmail(),
-                passwordEncoder.encode(accountRegistrationDto.getPassword()), Arrays.asList(new Role("ROLE_USER")));
+                passwordEncoder.encode(accountRegistrationDto.getPassword()), Arrays.asList(new Role("ROLE_ADMIN")));
         return accountRepository.save(account);
     }
 

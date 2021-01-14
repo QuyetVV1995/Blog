@@ -16,6 +16,10 @@
         <div  th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">
             Welcome <span sec:authentication="principal.username">!</span>
         </div>
+        <div  th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+            Welcome <span sec:authentication="principal.username">!</span>
+            <div> <a th:href="@{/post/add}"> ADD POST </a> </div>
+        </div>
 
     </div>
     <h1>QuyetVV Blog</a></h1>
@@ -41,7 +45,7 @@
         </li>
     </ul>
     </div>
-    <div  th:unless="${#authorization.expression('hasRole(''ROLE_USER'')')}">
+    <div  th:unless="${#authorization.expression('hasRole(''ROLE_ADMIN'')') or #authorization.expression('hasRole(''ROLE_USER'')')  }">
         <a th:href="@{/login}"> Login </a>
     </div>
 </header>
@@ -50,10 +54,16 @@
 
     <ul>
         <li th:each="postList: ${postList}">
+            <div  th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+                <p >ID: <span th:text="${postList.id}"> </span></p>
+                <p> <a th:href="@{/post/edit/{id}(id=${postList.id})}"> EDIT POST </a> </p>
+                <p> <a th:href="@{/post/delete/{id}(id=${postList.id})}"> DELETE POST </a> </p>
+            </div>
             <p >Title: <span th:text="${postList.title}"> </span></p>
             <p >Intro: <span th:text="${postList.intro}"> </span></p>
             <p >Create at: <span th:text="${postList.created_at}"> </span></p>
             <a class="more-link" href="#">Read more &rarr;</a>
+
 
         </li>
     </ul>

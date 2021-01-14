@@ -5,45 +5,42 @@ import com.example.demo.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
 @Controller
+@RequestMapping("/post")
 public class PostController {
 
     @Autowired
     private PostService postService;
 
-    
+
     @GetMapping("/add")
     public String createPost(Model model) {
         model.addAttribute("post", new Post());
-        return "form";
+        return "admin/formPost";
     }
 
     @PostMapping("/save")
     public String savePost(@ModelAttribute("post") Post post){
         postService.save(post);
-        return "redirect:/home";
+        return "redirect:/";
     }
 
     @GetMapping("/edit/{id}")
-    public ModelAndView editPost(@PathVariable(name = "id") int id){
-        ModelAndView mav = new ModelAndView("editPost");
+    public String editPost(Model model,@PathVariable(name = "id") int id){
         Post post = postService.edit(id);
-        mav.addObject("editPost", post);
-        return mav;
+        model.addAttribute("editPost", post);
+        return "admin/editPost";
     }
 
     @GetMapping("/delete/{id}")
     public String deleteById(@PathVariable(name = "id") long id){
         postService.deletePost(id);
-        return "redirect:/home";
+        return "redirect:/";
     }
 
     @GetMapping("/search/{title}")
