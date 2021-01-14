@@ -13,8 +13,7 @@ import javax.persistence.Table;
 
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
+
 
 @Entity
 @Table(name = "role")
@@ -24,6 +23,10 @@ public class Role {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+
+    public Role(){
+
+    }
 
     public Role(String name) {
         super();

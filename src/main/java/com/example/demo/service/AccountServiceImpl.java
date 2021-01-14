@@ -27,11 +27,11 @@ public class AccountServiceImpl implements AccountService {
     private BCryptPasswordEncoder passwordEncoder;
 
     @Override
-    public Account saveAccountRegistor(AccountRegistrationDto accountRegistrationDto) {
+    public Account save(AccountRegistrationDto accountRegistrationDto) {
         Account account = new Account(accountRegistrationDto.getFirstName(),
                 accountRegistrationDto.getLastName(), accountRegistrationDto.getEmail(),
                 passwordEncoder.encode(accountRegistrationDto.getPassword()), Arrays.asList(new Role("ROLE_USER")));
-        return account;
+        return accountRepository.save(account);
     }
 
     @Override

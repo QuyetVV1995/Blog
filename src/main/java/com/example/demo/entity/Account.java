@@ -39,6 +39,10 @@ public class Account {
 
     private Collection< Role > roles;
 
+    public Account(){
+
+    }
+
     public Account(String firstName, String lastName, String email, String password, Collection < Role > roles) {
         super();
         this.firstName = firstName;

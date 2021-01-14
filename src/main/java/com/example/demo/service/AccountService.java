@@ -10,5 +10,5 @@ import java.util.List;
 @Service
 public interface AccountService extends UserDetailsService {
 
-    public Account saveAccountRegistor(AccountRegistrationDto accountRegistrationDto);
+    public Account save(AccountRegistrationDto accountRegistrationDto);
 }
