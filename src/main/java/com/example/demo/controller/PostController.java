@@ -43,12 +43,12 @@ public class PostController {
         return "redirect:/";
     }
 
-    @GetMapping("/search/{title}")
-    public ModelAndView findByTitle(@PathVariable(name = "title") String title){
-        ModelAndView mav = new ModelAndView("searchByTitle");
-        List<Post> post = postService.findByTitle(title);
-        mav.addObject("searchByTitle",post);
-        return mav;
-    }
+//    @GetMapping("/search/{title}")
+//    public ModelAndView findByTitle(@PathVariable(name = "title") String title){
+//        ModelAndView mav = new ModelAndView("searchByTitle");
+//        List<Post> post = postService.findByTitle(title);
+//        mav.addObject("searchByTitle",post);
+//        return mav;
+//    }
 
 }

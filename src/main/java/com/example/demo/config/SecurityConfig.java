@@ -29,6 +29,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.csrf().disable();
+        http.headers().frameOptions().disable(); // bat giao dien cua H2
 
         // Các trang không yêu cầu login
         http.authorizeRequests().antMatchers("/", "/login", "registration/**",

@@ -16,7 +16,8 @@ import java.util.Collection;
 public class Account {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "accounts_id")
     private Long id;
 
     @Column(name = "first_name")
@@ -33,11 +34,10 @@ public class Account {
     @JoinTable(
             name = "accounts_roles",  // create new accounts_roles table
             joinColumns = @JoinColumn(
-                    // lien ket voi nhau qua khoa ngoai account_id, tham chieu cot ID cua account
-                    name = "account_id", referencedColumnName = "id"),
+                    // lien ket voi nhau qua khoa ngoai accounts_id
+                    name = "accounts_id"),
             inverseJoinColumns = @JoinColumn(
-                    name = "role_id", referencedColumnName = "id"))
-
+                    name = "role_id"))
     private Collection< Role > roles;
 
     @OneToMany(mappedBy = "account")

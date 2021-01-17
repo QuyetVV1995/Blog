@@ -29,7 +29,7 @@ public class Comment {
     private Post post;
 
     @ManyToOne
-    @JoinColumn(name = "account_id", referencedColumnName = "account_id", nullable = false)
+    @JoinColumn(name = "accounts_id", referencedColumnName = "accounts_id", nullable = false)
     @NotNull
     private Account account;
 

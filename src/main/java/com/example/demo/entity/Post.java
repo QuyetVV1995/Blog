@@ -20,20 +20,20 @@ import java.util.Collection;
 public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "post_id")
     private long id;
 
-    @Column(name = "title", nullable = false, length = 300)
+    @Column(name = "title", nullable = false, length = 1000)
     private String title;
 
-    @Column(name = "intro", nullable = false, length = 300)
+    @Column(name = "intro", nullable = false, length = 1000)
     private String intro;
 
     @Column(name = "created_at")
     private Date created_at;
 
     @ManyToOne
-    @JoinColumn(name = "account_id", referencedColumnName = "account_id", nullable = false)
+    @JoinColumn(name = "accounts_id", nullable = false)
     @NotNull
     private Account account;
 

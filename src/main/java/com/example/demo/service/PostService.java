@@ -18,6 +18,4 @@ public interface PostService {
 
     public void deletePost(long id);
 
-    public List<Post> findByTitle(String title);
-
 }
