@@ -31,13 +31,17 @@ public class Account {
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
-            name = "accounts_roles",
+            name = "accounts_roles",  // create new accounts_roles table
             joinColumns = @JoinColumn(
+                    // lien ket voi nhau qua khoa ngoai account_id, tham chieu cot ID cua account
                     name = "account_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(
                     name = "role_id", referencedColumnName = "id"))
 
     private Collection< Role > roles;
+
+    @OneToMany(mappedBy = "account")
+    private Collection<Post> posts;
 
     public Account(){
 
