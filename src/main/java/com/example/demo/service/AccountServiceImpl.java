@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Component
@@ -27,25 +28,9 @@ public class AccountServiceImpl implements AccountService {
     private BCryptPasswordEncoder passwordEncoder;
 
     @Override
-    public Account save(AccountRegistrationDto accountRegistrationDto) {
-        Account account = new Account(accountRegistrationDto.getFirstName(),
-                accountRegistrationDto.getLastName(), accountRegistrationDto.getEmail(),
-                passwordEncoder.encode(accountRegistrationDto.getPassword()), Arrays.asList(new Role("ROLE_USER")));
-        return accountRepository.save(account);
+    public List<Account> getAllAccount() {
+        return accountRepository.findAll();
     }
 
-    @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-
-        Account account = accountRepository.findByEmail(email);
-        if (account == null) {
-            throw new UsernameNotFoundException("Invalid email or password.");
-        }
-        return new org.springframework.security.core.userdetails.User(account.getEmail(), account.getPassword(), mapRolesToAuthorities(account.getRoles()));
-    }
-
-    private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles){
-        return roles.stream().map(role -> new SimpleGrantedAuthority(role.getRole())).collect(Collectors.toList());
-    }
 
 }

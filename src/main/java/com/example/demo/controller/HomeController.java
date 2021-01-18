@@ -13,7 +13,6 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 
 @Controller
-//@RequestMapping("/admin/account")
 public class HomeController {
     @Autowired
     private AccountService accountService;

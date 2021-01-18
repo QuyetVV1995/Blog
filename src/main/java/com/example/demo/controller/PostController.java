@@ -17,38 +17,4 @@ public class PostController {
     @Autowired
     private PostService postService;
 
-
-    @GetMapping("/add")
-    public String createPost(Model model) {
-        model.addAttribute("post", new Post());
-        return "admin/formPost";
-    }
-
-    @PostMapping("/save")
-    public String savePost(@ModelAttribute("post") Post post){
-        postService.save(post);
-        return "redirect:/";
-    }
-
-    @GetMapping("/edit/{id}")
-    public String editPost(Model model,@PathVariable(name = "id") int id){
-        Post post = postService.edit(id);
-        model.addAttribute("editPost", post);
-        return "admin/editPost";
-    }
-
-    @GetMapping("/delete/{id}")
-    public String deleteById(@PathVariable(name = "id") long id){
-        postService.deletePost(id);
-        return "redirect:/";
-    }
-
-//    @GetMapping("/search/{title}")
-//    public ModelAndView findByTitle(@PathVariable(name = "title") String title){
-//        ModelAndView mav = new ModelAndView("searchByTitle");
-//        List<Post> post = postService.findByTitle(title);
-//        mav.addObject("searchByTitle",post);
-//        return mav;
-//    }
-
 }

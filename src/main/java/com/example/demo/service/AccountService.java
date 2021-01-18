@@ -6,9 +6,11 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
-public interface AccountService extends UserDetailsService {
+public interface AccountService {
 
-    public Account save(AccountRegistrationDto accountRegistrationDto);
+    public List<Account> getAllAccount();
+
 }

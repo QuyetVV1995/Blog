@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>List Account</title>
+</head>
+<body>
+<ul>
+    <li th:each="listAccount: ${listAccount}">
+        <p >First name: <span th:text="${listAccount.firstName}"> </span></p>
+        <p >Last name: <span th:text="${listAccount.lastName}"> </span></p>
+        <p >Email: <span th:text="${listAccount.email}"> </span></p>
+        <p >Roles: <span th:text="${listAccount.roles}"> </span></p>
+        <p >Post: <span th:text="${listAccount.posts}"> </span></p>
+    </li>
+</ul>
+</body>
+</html>
