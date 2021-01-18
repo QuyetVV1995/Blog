@@ -1,80 +1,67 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="ISO-8859-1">
-    <title>Registration</title>
-    <link rel="stylesheet"
-          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-          crossorigin="anonymous">
+    <!--<title>Spring Boot Thymeleaf + Spring Security</title>-->
+
+    <div th:replace="/fragments/header :: header-css"/>
+
 </head>
 <body>
 
-<!-- create navigation bar ( header) -->
-<nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed"
-                    data-toggle="collapse" data-target="#navbar" aria-expanded="false"
-                    aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span> <span
-                    class="icon-bar"></span> <span class="icon-bar"></span> <span
-                    class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#" th:href="@{/}">Registration and
-                Login Module</a>
-        </div>
-    </div>
-</nav>
+<div th:replace="/fragments/header :: header"/>
 
-<br>
-<br>
-<!-- Create HTML registration form -->
 <div class="container">
-    <div class="row">
-        <div class="col-md-6 col-md-offset-3">
 
-            <!-- success message -->
-            <div th:if="${param.success}">
-                <div class="alert alert-info">You've successfully registered
-                    to our awesome app!</div>
-            </div>
+    <!--Show this info message only if registered successfully-->
+    <div class="alert alert-info" th:if="${successMessage}" th:utext="${successMessage}"></div>
 
-            <h1>Registration</h1>
+    <div class="row" style="margin-top:20px">
+        <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+            <form autocomplete="off" action="#" th:action="@{/registration}"
+                  th:object="${account}" method="post" role="form">
 
-            <form th:action="@{/registration}" method="post" th:object="${account}">
                 <div class="form-group">
-                    <label class="control-label" for="firstName"> First Name </label>
-                    <input id="firstName" class="form-control" th:field="*{firstName}"
-                           required autofocus="autofocus" />
+                    <label th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"
+                           class="alert alert-danger"></label>
+                    <input type="text" th:field="*{firstName}" placeholder="firstName"
+                           class="form-control input-lg"/>
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label" for="lastName"> Last Name </label> <input
-                        id="lastName" class="form-control" th:field="*{lastName}"
-                        required autofocus="autofocus" />
+                    <label th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"
+                           class="alert alert-danger"></label>
+                    <input type="text" th:field="*{lastName}" placeholder="Last Name"
+                           class="form-control input-lg"/>
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label" for="email"> Email </label> <input
-                        id="email" class="form-control" th:field="*{email}" required
-                        autofocus="autofocus" />
+                    <label th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
+                           class="alert alert-danger"></label>
+                    <input type="text" th:field="*{email}" placeholder="Email"
+                           class="form-control input-lg"/>
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label" for="password"> Password </label> <input
-                        id="password" class="form-control" type="password"
-                        th:field="*{password}" required autofocus="autofocus" />
+                    <label th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
+                           class="alert alert-danger"></label>
+                    <input type="password" th:field="*{password}" placeholder="Password"
+                           class="form-control input-lg"/>
                 </div>
 
-                <div class="form-group">
-                    <button type="submit" class="btn btn-success">Register</button>
-                    <span>Already registered? <a href="/" th:href="@{/login}">Login
-        here</a></span>
+                <div class="row">
+                    <div class="col-sm-3" style="float: none; margin: 0 auto;">
+                        <input type="submit" class="btn btn-primary btn-block" value="Submit"/>
+                    </div>
                 </div>
+
             </form>
         </div>
     </div>
+
 </div>
+<!-- /.container -->
+
+<div th:replace="/fragments/footer :: footer"/>
+
 </body>
 </html>

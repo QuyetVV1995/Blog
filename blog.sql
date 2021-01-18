@@ -1,8 +1,8 @@
-create database blog_test;
-use blog_test;
+create database blog;
+use blog;
 
 create table accounts (
-       accounts_id bigint not null,
+        accounts_id bigint not null auto_increment,
         email varchar(255),
         first_name varchar(255),
         last_name varchar(255),
@@ -12,7 +12,7 @@ create table accounts (
     );
 
  create table role (
-       role_id bigint not null,
+       role_id bigint not null auto_increment,
         role varchar(255),
         primary key (role_id)
     );
@@ -50,46 +50,46 @@ create table post (
  alter table accounts_roles
        add constraint FKocid74jdgib9xk7u5tdmqxmff
        foreign key (role_id)
-       references role;
+       references role(role_id);
 
 alter table accounts_roles
        add constraint FKdkp74nwsrtw0p54ebqbxw2fkn
        foreign key (accounts_id)
-       references accounts;
+       references accounts(accounts_id);
 
 alter table category
        add constraint FKopeo59t1mr1euhddriighg7ir
        foreign key (post_id)
-       references post;
+       references post(post_id);
 
 alter table comment
        add constraint FKa7pw8ftnoftr5sragk0vca5s5
        foreign key (accounts_id)
-       references accounts;
+       references accounts(accounts_id);
 
  alter table comment
        add constraint FKs1slvnkuemjsq2kj4h3vhx7i1
        foreign key (post_id)
-       references post;
+       references post(post_id);
 
 alter table post
        add constraint FK5843w8217vmjooov25whd3100
        foreign key (accounts_id)
-       references accounts;
+       references accounts(accounts_id);
 
 
 -- Users
 -- password in plaintext: "password"
-INSERT INTO ACCOUNTS (accounts_id, password, email,  first_name, last_name)
+INSERT INTO ACCOUNTS ( password, email,  first_name, last_name)
 VALUES
-  (1, '$2a$06$OAPObzhRdRXBCbk7Hj/ot.jY3zPwR8n7/mfLtKIgTzdJa4.6TwsIm', 'user@mail.com',  'Name', 'Surname');
+  ( '$2a$06$OAPObzhRdRXBCbk7Hj/ot.jY3zPwR8n7/mfLtKIgTzdJa4.6TwsIm', 'user@mail.com',  'Name', 'Surname');
 -- password in plaintext: "password"
-INSERT INTO ACCOUNTS (accounts_id, password, email,  first_name, last_name)
+INSERT INTO ACCOUNTS ( password, email,  first_name, last_name)
 VALUES
-  (2, '$2a$06$OAPObzhRdRXBCbk7Hj/ot.jY3zPwR8n7/mfLtKIgTzdJa4.6TwsIm', 'johndoe@gmail.com',  'John', 'Doe');
+  ( '$2a$06$OAPObzhRdRXBCbk7Hj/ot.jY3zPwR8n7/mfLtKIgTzdJa4.6TwsIm', 'johndoe@gmail.com',  'John', 'Doe');
 -- password in plaintext: "password"
-INSERT INTO ACCOUNTS (accounts_id, password, email,  first_name, last_name)
-VALUES (3, '$2a$06$OAPObzhRdRXBCbk7Hj/ot.jY3zPwR8n7/mfLtKIgTzdJa4.6TwsIm', 'ana@mail.com', 'Ana', 'Surname');
+INSERT INTO ACCOUNTS ( password, email,  first_name, last_name)
+VALUES ( '$2a$06$OAPObzhRdRXBCbk7Hj/ot.jY3zPwR8n7/mfLtKIgTzdJa4.6TwsIm', 'ana@mail.com', 'Ana', 'Surname');
 
 -- Roles
 INSERT INTO ROLE (role_id, role)
