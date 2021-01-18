@@ -31,7 +31,7 @@ INSERT INTO ACCOUNTS_ROLES (accounts_id, role_id)
 VALUES (3, 2);
 
 -- Posts
-INSERT INTO POST (post_id, accounts_id, title, intro, created_at)
+INSERT INTO POST (post_id, accounts_id, title, intro, created_at )
 VALUES (1, 1, 'Title 1',
         '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."',
         --         CURRENT_TIMESTAMP());
@@ -107,3 +107,9 @@ INSERT INTO COMMENT (comment_id,post_id, accounts_id, body, create_date)
 VALUES (6,6, 3,
         '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."',
         CURRENT_TIMESTAMP());
+
+-- CATEGORY
+INSERT INTO  CATEGORY(category_id, category, post_id)
+VALUES(1,'SPRINGBOOT', 1);
+INSERT INTO  CATEGORY(category_id, category, post_id)
+VALUES(2,'JAPANESES', 2);
