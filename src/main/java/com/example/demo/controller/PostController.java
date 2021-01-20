@@ -126,6 +126,6 @@ public class PostController {
     @GetMapping(value = "post/detail/{name}")
     public String PostDetail(@PathVariable String name, Model model){
         model.addAttribute("String", name);
-        return "/detail";
+        return "/Japaneses/" + name;
     }
 }

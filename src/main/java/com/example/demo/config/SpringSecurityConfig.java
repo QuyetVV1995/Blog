@@ -23,9 +23,11 @@ import javax.sql.DataSource;
 @Configuration
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final AccessDeniedHandler accessDeniedHandler;
+    @Autowired
+    private AccessDeniedHandler accessDeniedHandler;
 
-    final DataSource dataSource;
+    @Autowired
+    DataSource dataSource;
 
     @Value("${spring.admin.username}")
     private String adminUsername;
@@ -39,11 +41,6 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     @Value("${spring.queries.roles-query}")
     private String rolesQuery;
 
-    @Autowired
-    public SpringSecurityConfig(AccessDeniedHandler accessDeniedHandler, DataSource dataSource) {
-        this.accessDeniedHandler = accessDeniedHandler;
-        this.dataSource = dataSource;
-    }
 
     /**
      * HTTPSecurity configurer
@@ -59,7 +56,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/home", "/registration", "/error", "/blog/**", "/post/**", "/h2-console/**").permitAll()
-                .antMatchers("/newPost/**", "/commentPost/**", "/createComment/**").hasAnyRole("USER")
+                .antMatchers("/newPost/**", "/commentPost/**", "/createComment/**").hasAnyRole("USER", "ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
