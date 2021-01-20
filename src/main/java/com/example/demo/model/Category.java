@@ -1,13 +1,9 @@
-package com.example.demo.entity;
+package com.example.demo.model;
 
-import com.sun.istack.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
-import java.util.Collection;
+import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter

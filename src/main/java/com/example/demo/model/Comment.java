@@ -1,9 +1,11 @@
-package com.example.demo.entity;
+package com.example.demo.model;
 
-import com.sun.istack.NotNull;
 import org.hibernate.annotations.CreationTimestamp;
 
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotEmpty;
 import java.util.Date;
 
 @Entity
@@ -11,11 +13,12 @@ import java.util.Date;
 public class Comment {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "comment_id")
     private Long id;
 
     @Column(name = "body", columnDefinition = "TEXT")
+    @NotEmpty(message = "*Please write something")
     private String body;
 
     @Temporal(TemporalType.TIMESTAMP)
@@ -26,12 +29,12 @@ public class Comment {
     @ManyToOne
     @JoinColumn(name = "post_id", referencedColumnName = "post_id", nullable = false)
     @NotNull
-    private Post post;
+    private Post post; // Duoc mappedBy "post" trong Post.java
 
     @ManyToOne
-    @JoinColumn(name = "accounts_id", referencedColumnName = "accounts_id", nullable = false)
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id", nullable = false)
     @NotNull
-    private Account account;
+    private User user;
 
     public Long getId() {
         return id;
@@ -65,12 +68,11 @@ public class Comment {
         this.post = post;
     }
 
-    public Account getAccount() {
-        return account;
+    public User getUser() {
+        return user;
     }
 
-    public void setAccount(Account account) {
-        this.account = account;
+    public void setUser(User user) {
+        this.user = user;
     }
 }
-

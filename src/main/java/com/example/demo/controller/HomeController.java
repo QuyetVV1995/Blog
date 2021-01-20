@@ -1,33 +1,34 @@
 package com.example.demo.controller;
 
-import com.example.demo.entity.Account;
-import com.example.demo.entity.Post;
-import com.example.demo.service.AccountService;
+import com.example.demo.model.Post;
 import com.example.demo.service.PostService;
+import com.example.demo.util.Pager;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class HomeController {
-    @Autowired
-    private AccountService accountService;
-    @Autowired
-    private PostService postService;
 
-    @GetMapping("/login")
-    public String login() {
-        return "login";
+    private final PostService postService;
+
+    @Autowired
+    public HomeController(PostService postService) {
+        this.postService = postService;
     }
 
-    @GetMapping("/")
-    public String getAllPost(Model model){
-        List<Post> postList = postService.getAllPost();
-        model.addAttribute("postList", postList);
-        return "homePage";
+    @GetMapping("/home")
+    public String home(@RequestParam(defaultValue = "0") int page,
+                       Model model) {
+
+        Page<Post> posts = postService.findAllOrderedByDatePageable(page);
+        Pager pager = new Pager(posts);
+
+        model.addAttribute("pager", pager);
+
+        return "/home";
     }
 }
