@@ -36,6 +36,9 @@ public class Post {
     @Column(name = "body", columnDefinition = "TEXT")
     private String body;
 
+    @Column(name = "name")
+    private String name;
+
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "create_date", nullable = false, updatable = false)
     @CreationTimestamp
