@@ -123,9 +123,19 @@ public class PostController {
         return principal != null && principal.getName().equals(post.getUser().getUsername());
     }
 
-    @GetMapping(value = "post/detail/{name}")
-    public String PostDetail(@PathVariable String name, Model model){
-        model.addAttribute("String", name);
-        return "/Japaneses/" + name;
+    @GetMapping(value = "post/detail/{id}")
+    public String PostDetail(@PathVariable long id,Principal principal, Model model){
+        Optional<Post> optionalPost = postService.findForId(id);
+        if (optionalPost.isPresent()) {
+            Post post = optionalPost.get();
+            model.addAttribute("post", post);
+            String name = post.getName();
+            if (isPrincipalOwnerOfPost(principal, post)) {
+                model.addAttribute("username", principal.getName());
+            }
+            return "/Japaneses/" + name;
+        } else {
+            return "/error";
+        }
     }
 }

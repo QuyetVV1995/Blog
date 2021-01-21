@@ -150,6 +150,12 @@
         <li>その時はあまり感じなかったが、後になって怒りがわいていた。Thời gian đó không cảm thấy gì mấy nhưng sau đó đã tức giận.</li>
         <li>しばらくしてから、優勝の喜びがこみあげてきた。Một lúc sau, niềm vui chiến thắng tràn ngập.</li>
     </ul>
+</div>
+
+<h2>Category:</h2>
+<!--Category-->
+<div class="well" th:each="category : ${post.category}">
+    <h3 th:text="${category.category}">Category</h3>
 
 </div>
 </body>
