@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <div th:replace="/fragments/header :: header-css"/>
+</head>
+<body>
+        <div th:replace="/fragments/header :: header"/>
+
+        <!--New Post Form-->
+
+                <form th:action="@{/newPost}"
+                      th:object="${post}" method="post"
+                      role="form">
+
+                    <h2 class="text-center">Write new post</h2>
+
+                    <div>
+                        <input type="text" th:field="*{title}" placeholder="Title"/>
+                    </div>
+
+                    <div>
+                        <input th:field="*{name}" placeholder="Name"/>
+                    </div>
+
+                    <div>
+                        <input th:field="*{intro}" placeholder="Intro"/>
+                    </div>
+
+                    <div>
+                        <input th:field="*{slug}" placeholder="slug"/>
+                    </div>
+
+                    <div>
+                        <input type="submit" value="Save"/>
+                    </div>
+
+                </form>
+
+</body>
+</html>

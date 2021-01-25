@@ -7,13 +7,33 @@
 <div th:replace="/fragments/header :: header"/>
 <div >
     <ul>
-        <li th:each="postList: ${postList}">
+        <li th:each="postLists: ${postList}">
 
-                    <div class="media-body">
-                        <p class="title mb-1">Title: <span th:text="${postList.title}"> </span></p>
-                        <p class="intro">Intro: <span th:text="${postList.intro}"> </span></p>
+                    <div >
+                        <p >ID: <span th:text="${postLists.id}"> </span></p>
+                        <p >Title: <span th:text="${postLists.title}"> </span></p>
+<!--                        <p >Intro: <span th:text="${postLists.intro}"> </span></p>-->
+<!--                        <p >Name: <span th:text="${postLists.name}"> </span></p>-->
+<!--                        <p >Date: <span th:text="${postLists.createDate}"> </span></p>-->
+<!--                        <p >user_id: <span th:text="${postLists.user.id}"> </span></p>-->
+
+<!--                        <p>Comment</p>-->
+<!--                        <span th:each="comments : ${postLists.comments}">-->
+<!--                        <h3 th:text="${comments.body}">Comments</h3>-->
+<!--                        </span>-->
+
+<!--                        <p>Category</p>-->
+<!--                        <span th:each="category : ${postLists.category}">-->
+<!--                        <h3 th:text="${category.category}">Category</h3>-->
+<!--                        </span>-->
+
+<!--                        <p>Tag</p>-->
+<!--                        <span th:each="tag : ${postLists.tag}">-->
+<!--                        <h3 th:text="${tag.name_tag}">Tag</h3>-->
+<!--                        </span>-->
+
                         <a class="more-link" href="#">Read more &rarr;</a>
-                    </div><!--//media-body-->
+                    </div>
 
         </li>
     </ul>

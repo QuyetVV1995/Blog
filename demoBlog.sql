@@ -10,37 +10,42 @@ create table category (
     create table comment (
        comment_id bigint not null auto_increment primary key,
         body TEXT,
-        create_date timestamp not null,
+        create_at timestamp not null,
         post_id bigint not null,
         user_id bigint not null
     );
      create table post (
        post_id bigint not null auto_increment primary key,
-        body TEXT,
-        create_date timestamp not null,
-        title varchar(255) not null,
+       title varchar(255) not null,
+        intro varchar(255),
+        slug varchar(255),
         name varchar(255),
+        create_date timestamp not null,
         user_id bigint not null
     );
 
     create table role (
        role_id bigint not null auto_increment primary key,
-        role varchar(255)
+	   role varchar(255)
     );
 
     create table user (
        user_id bigint not null auto_increment primary key,
-        active integer not null,
+        status boolean not null,
         email varchar(255) not null,
-        last_name varchar(255) not null,
-        name varchar(255) not null,
-        password varchar(255) not null,
-        username varchar(255) not null
+        username varchar(255) not null,
+        password varchar(255) not null
     );
 
     create table user_role (
        user_id bigint not null,
         role_id bigint not null
+    );
+
+    create table tag (
+       tag_id bigint not null auto_increment primary key,
+	   name_tag varchar(255),
+	   post_id bigint not null
     );
 
     alter table role add constraint UK_bjxn5ii7v7ygwx39et0wawu0q unique (role);
@@ -55,6 +60,10 @@ create table category (
 	alter table comment
        add constraint FKs1slvnkuemjsq2kj4h3vhx7i1
        foreign key (post_id)
+       references post(post_id);
+
+	alter table tag
+       add foreign key (post_id)
        references post(post_id);
 
 	alter table comment
@@ -78,12 +87,10 @@ create table category (
        references user(user_id);
 
 -- USER
-INSERT INTO USER ( password, email, username, name, last_name, active)
-VALUES
-  ( '$2a$06$OAPObzhRdRXBCbk7Hj/ot.jY3zPwR8n7/mfLtKIgTzdJa4.6TwsIm', 'admin@mail.com', 'admin', 'Name', 'Surname', 1);
-INSERT INTO USER ( password, email, username, name, last_name, active)
-VALUES
-  ( '$2a$06$OAPObzhRdRXBCbk7Hj/ot.jY3zPwR8n7/mfLtKIgTzdJa4.6TwsIm', 'user@gmail.com', 'user', 'Name', 'Surname', 1);
+INSERT INTO USER ( email, password, username, status)
+VALUES ("admin@gmail.com", "admin", "admin", true);
+INSERT INTO USER ( email, password, username, status)
+VALUES ("user@gmail.com", "user", "user", true);
 
 -- ROLE
 INSERT INTO ROLE ( role)
@@ -98,13 +105,49 @@ INSERT INTO USER_ROLE (user_id, role_id)
 VALUES (2, 2);
 
 -- Posts
-INSERT INTO POST ( user_id, title,name, body, create_date)
-VALUES ( 1, 'Ngữ pháp Mimi kara N3 Unit1','Mini_N3_Unit1', 'Dịch theo sách Mini kara ngữ pháp N3',now());
+INSERT INTO POST (user_id, title,name, intro, slug, create_date)
+VALUES ( 1, 'Ngữ pháp Mimi kara N3 Unit1','Mini_N3_Unit1', 'Dịch theo sách Mini kara ngữ pháp N3',"slug",now());
+-- Posts
+INSERT INTO POST (user_id, title,name, intro, slug, create_date)
+VALUES ( 1, 'Ngữ pháp Mimi kara N3 Unit1','Mini_N3_Unit1', 'Dịch theo sách Mini kara ngữ pháp N3',"slug",now());
+-- Posts
+INSERT INTO POST (user_id, title,name, intro, slug, create_date)
+VALUES ( 2, 'Ngữ pháp Mimi kara N3 Unit1','Mini_N3_Unit1', 'Dịch theo sách Mini kara ngữ pháp N3',"slug",now());
+-- Posts
+INSERT INTO POST (user_id, title,name, intro, slug, create_date)
+VALUES ( 2, 'Ngữ pháp Mimi kara N3 Unit1','Mini_N3_Unit1', 'Dịch theo sách Mini kara ngữ pháp N3',"slug",now());
 
 -- CATEGORY
 INSERT INTO  CATEGORY(post_id, category)
-VALUES(1,'JAPANESES');
+VALUES(1,'JAPANESES 1');
+-- CATEGORY
+INSERT INTO  CATEGORY(post_id, category)
+VALUES(2,'JAPANESES 2');
+-- CATEGORY
+INSERT INTO  CATEGORY(post_id, category)
+VALUES(3,'JAPANESES 3');
+-- CATEGORY
+INSERT INTO  CATEGORY(post_id, category)
+VALUES(4,'JAPANESES 4');
 
+-- TAG
+INSERT INTO  TAG (post_id, name_tag)
+VALUES(1,'ngữ pháp');
+INSERT INTO  TAG (post_id, name_tag)
+VALUES(2,'ngữ pháp');
+INSERT INTO  TAG (post_id, name_tag)
+VALUES(3,'ngữ pháp');
+INSERT INTO  TAG (post_id, name_tag)
+VALUES(4,'ngữ pháp');
 
+-- Comment
+INSERT INTO COMMENT(post_id, user_id, body, create_at)
+VALUES(1,1,"Comment1", now());
+INSERT INTO COMMENT(post_id, user_id, body, create_at)
+VALUES(1,2,"Comment1", now());
+INSERT INTO COMMENT(post_id, user_id, body, create_at)
+VALUES(2,1,"Comment1", now());
+INSERT INTO COMMENT(post_id, user_id, body, create_at)
+VALUES(2,2,"Comment1", now());
        
        

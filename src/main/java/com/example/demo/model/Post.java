@@ -38,9 +38,12 @@ public class Post {
     @Column(name = "name")
     private String name;
 
-    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "slug")
+    private String slug;
+
+    @Temporal(TemporalType.TIMESTAMP)       // Annotation nay la gi
     @Column(name = "create_date", nullable = false, updatable = false)
-    @CreationTimestamp
+    @CreationTimestamp                      // Annotation nay la gi
     private Date createDate;
 
     @ManyToOne
