@@ -13,6 +13,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -29,8 +30,6 @@ public class Post {
     private Long id;
 
     @Column(name = "title", nullable = false)
-    @Length(min = 5, message = "*Your title must have at least 5 characters")
-    @NotEmpty(message = "*Please provide title")
     private String title;
 
     @Column(name = "body", columnDefinition = "TEXT")
@@ -50,9 +49,12 @@ public class Post {
     private User user;
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
-    private Collection<Comment> comments;
+    private List<Comment> comments;
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
-    private Collection<Category> category;
+    private List<Category> category;
+
+    @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
+    private List<Tag> tag;
 
 }

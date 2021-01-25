@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Getter
 @Setter
@@ -22,7 +23,6 @@ public class Category {
     private String category;
 
     @ManyToOne
-    @JoinColumn(name = "post_id", referencedColumnName = "post_id", nullable = false)
-    @NotNull
+    @JoinColumn(name = "post_id" ,nullable = false)
     private Post post;
 }

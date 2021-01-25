@@ -1,5 +1,9 @@
 package com.example.demo.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
 
@@ -7,6 +11,11 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.NotEmpty;
 import java.util.Date;
+
+@Setter
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
 
 @Entity
 @Table(name = "comment")
@@ -18,7 +27,6 @@ public class Comment {
     private Long id;
 
     @Column(name = "body", columnDefinition = "TEXT")
-    @NotEmpty(message = "*Please write something")
     private String body;
 
     @Temporal(TemporalType.TIMESTAMP)
@@ -27,52 +35,13 @@ public class Comment {
     private Date createDate;
 
     @ManyToOne
-    @JoinColumn(name = "post_id", referencedColumnName = "post_id", nullable = false)
+    @JoinColumn(name = "post_id", nullable = false)
     @NotNull
-    private Post post; // Duoc mappedBy "post" trong Post.java
+    private Post post;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "user_id", nullable = false)
+    @JoinColumn(name = "user_id",  nullable = false)
     @NotNull
     private User user;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getBody() {
-        return body;
-    }
-
-    public void setBody(String body) {
-        this.body = body;
-    }
-
-    public Date getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(Date date) {
-        this.createDate = date;
-    }
-
-    public Post getPost() {
-        return post;
-    }
-
-    public void setPost(Post post) {
-        this.post = post;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
 }

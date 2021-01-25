@@ -1,7 +1,17 @@
 package com.example.demo.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.util.Collection;
+
+@Setter
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
 
 @Entity
 @Table(name = "role")
@@ -18,27 +28,5 @@ public class Role {
     @ManyToMany(cascade = CascadeType.ALL, mappedBy = "roles")
     private Collection<User> users;
 
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-    public Collection<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(Collection<User> users) {
-        this.users = users;
-    }
 }
