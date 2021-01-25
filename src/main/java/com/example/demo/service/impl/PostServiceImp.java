@@ -9,10 +9,22 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
 public class PostServiceImp implements PostService {
 
+    @Autowired
+    private PostRepository postRepository;
 
+    @Override
+    public List<Post> getALlPost() {
+        return postRepository.findAll();
+    }
+
+    @Override
+    public Post save(Post post) {
+        return postRepository.save(post);
+    }
 }

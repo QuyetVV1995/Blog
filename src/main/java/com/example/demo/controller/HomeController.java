@@ -6,17 +6,5 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class HomeController {
-    @GetMapping("/about")
-    public String index(Model model) {
-        model.addAttribute("name", "Thu");
 
-        // Trả về file hello.html cùng với thông tin trong object Model
-        return "about";
-    }
-
-
-    @GetMapping("/admin")
-    public String admin() {
-        return "about";
-    }
 }

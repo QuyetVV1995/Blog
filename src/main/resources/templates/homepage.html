@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <div th:replace="/fragments/header :: header-css"/>
+</head>
+<body>
+<div th:replace="/fragments/header :: header"/>
+<div >
+    <ul>
+        <li th:each="postList: ${postList}">
+
+                    <div class="media-body">
+                        <p class="title mb-1">Title: <span th:text="${postList.title}"> </span></p>
+                        <p class="intro">Intro: <span th:text="${postList.intro}"> </span></p>
+                        <a class="more-link" href="#">Read more &rarr;</a>
+                    </div><!--//media-body-->
+
+        </li>
+    </ul>
+</div>
+<div th:replace="/fragments/footer :: footer"/>
+</body>
+</html>

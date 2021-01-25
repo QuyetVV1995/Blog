@@ -32,8 +32,8 @@ public class Post {
     @Column(name = "title", nullable = false)
     private String title;
 
-    @Column(name = "body", columnDefinition = "TEXT")
-    private String body;
+    @Column(name = "intro", columnDefinition = "TEXT")
+    private String intro;
 
     @Column(name = "name")
     private String name;

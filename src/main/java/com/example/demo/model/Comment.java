@@ -30,9 +30,9 @@ public class Comment {
     private String body;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "create_date", nullable = false, updatable = false)
+    @Column(name = "create_at", nullable = false, updatable = false)
     @CreationTimestamp
-    private Date createDate;
+    private Date create_at;
 
     @ManyToOne
     @JoinColumn(name = "post_id", nullable = false)
