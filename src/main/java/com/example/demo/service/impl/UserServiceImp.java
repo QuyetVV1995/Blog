@@ -9,12 +9,15 @@ import com.example.demo.repository.RoleRepository;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImp implements UserService {
@@ -23,6 +26,8 @@ public class UserServiceImp implements UserService {
     private UserRepository userRepository;
     @Autowired
     private RoleRepository roleRepository;
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
 
     private static final String USER_ROLE = "ROLE_USER";
 
@@ -38,10 +43,9 @@ public class UserServiceImp implements UserService {
 
     @Override
     public User save(UserDto userDto) {
-        User user =  new User( userDto.getEmail(), userDto.getPassword(), userDto.getUsername(), true);
+        User user =  new User( userDto.getEmail(), passwordEncoder.encode(userDto.getPassword()), userDto.getUsername(), true);
         user.setRoles(Collections.singleton(roleRepository.findByRole(USER_ROLE)));
         return userRepository.saveAndFlush(user);
     }
-
 
 }

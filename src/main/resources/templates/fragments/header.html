@@ -1,4 +1,4 @@
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 <head>
     <div th:fragment="header-css">
@@ -10,6 +10,10 @@
 <body>
     <div th:fragment="header">
         <h1>Header</h1>
+        <div class="form-group" th:if="${#authorization.expression('hasRole(''USER'')')}">
+            Welcome <span sec:authentication="principal.username"> User</span>
+        </div>
+
         <a th:href="@{/newPost}">New Post</a>
     </div>
 
