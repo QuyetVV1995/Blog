@@ -1,15 +1,11 @@
 package com.example.demo.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
 import java.util.Collection;
 import java.util.List;
 
@@ -37,18 +33,20 @@ public class User {
     private String username;
 
     @Column(name = "status", nullable = false)
-    private int status;
+    private boolean status;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private List<Role> roles;
+    private Collection<Role> roles;
 
     @OneToMany(mappedBy = "user")
     private List<Post> posts;
 
-    public User(String username, String password) {
-        this.username = username;
+    public User(String email, String password, String username, boolean status) {
+        this.email = email;
         this.password = password;
+        this.username = username;
+        this.status =status;
 
     }
 }

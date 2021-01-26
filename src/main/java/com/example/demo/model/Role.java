@@ -29,4 +29,7 @@ public class Role {
     private Collection<User> users;
 
 
+    public Role(String role_user) {
+        this.role = role_user;
+    }
 }
