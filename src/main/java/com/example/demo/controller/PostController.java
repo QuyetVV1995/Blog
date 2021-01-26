@@ -8,8 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.security.Principal;
@@ -24,6 +23,12 @@ public class PostController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    public PostController(PostService postService, UserService userService) {
+        this.postService = postService;
+        this.userService = userService;
+    }
+
     @GetMapping("/")
     public String getAllPost(Model model){
         List<Post> postList = postService.getALlPost();
@@ -31,29 +36,33 @@ public class PostController {
         return "homepage";
     }
 
-    @GetMapping("/newPost")
-    public String newPost(Principal principal, Model model){        // Principal la gi????
+    @RequestMapping(value = "/newPost", method = RequestMethod.GET)
+    public String newPost(Principal principal,Model model) {
+
         Optional<User> user = userService.findByUsername(principal.getName());
-        if(user.isPresent()){
+
+        if (user.isPresent()) {
             Post post = new Post();
             post.setUser(user.get());
+
             model.addAttribute("post", post);
-            return "postForm";
-        }
-        else
-        {
-            return "error";
+
+            return "/postForm";
+
+        } else {
+            return "/error";
         }
     }
 
-    @PostMapping("/newPost")
-    public String createNewPost(@Valid Post post, BindingResult bindingResult){
-        if(bindingResult.hasErrors()){
-            return "postForm";
-        }
-        else{
+    @RequestMapping(value = "/newPost", method = RequestMethod.POST)
+    public String createNewPost(@Valid Post post,  BindingResult bindingResult) {
+        System.out.println(post.getUser());
+        System.out.println(post.getTitle());
+        if (bindingResult.hasErrors()) {
+            return "/postForm";
+        } else {
             postService.save(post);
-            return "redirect:/homepage";
+            return "redirect:/" ;
         }
     }
 }

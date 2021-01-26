@@ -12,6 +12,10 @@
         <h1>Header</h1>
         <div class="form-group" th:if="${#authorization.expression('hasRole(''USER'')')}">
             Welcome <span sec:authentication="principal.username"> User</span>
+            <a  th:href="@{/logout}">Logout </a>
+        </div>
+        <div class="form-group" th:unless="${#authorization.expression('hasRole(''USER'')')}">
+            <a  th:href="@{/login}">Login </a>
         </div>
 
         <a th:href="@{/newPost}">New Post</a>
